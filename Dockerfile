@@ -5,7 +5,7 @@ RUN corepack enable
 # Install dependencies with pinned Yarn
 FROM base AS deps
 WORKDIR /app
-COPY package.json yarn.lock .yarnrc.yml .yarn/ ./
+COPY package.json yarn.lock .yarnrc.yml ./
 RUN yarn install --immutable
 
 # Build the app
