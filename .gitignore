@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Builds
+/dist/
+/coverage/
+
+# Yarn Berry
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# Yarn PnP (not used, but ignore just in case)
+.pnp.*
+
+# Env files
+.env*
+
+# Logs
+*.log
+logs/
+
+# OS/editor
+.DS_Store
+.vscode/
+
+# Others
+openapi.json
