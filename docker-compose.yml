@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: immersion
+      POSTGRES_PASSWORD: immersion
+      POSTGRES_DB: immersion
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U immersion']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: LOCAL
+      PORT: 3000
+      DATABASE_URL: postgresql://immersion:immersion@db:5432/immersion
+    ports:
+      - '3000:3000'
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles:
+      - api
+
+  api-staging:
+    extends:
+      service: api
+    profiles:
+      - api-staging
+
+  api-prod:
+    extends:
+      service: api
+    profiles:
+      - api-prod

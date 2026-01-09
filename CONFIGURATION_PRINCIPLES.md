@@ -88,7 +88,7 @@ From `.prettierignore`:
 - `yarn format` → `prettier --write .`
 - `yarn format:check` → `prettier --check .`
 
-**Principle:** run formatting in hooks/CI as a *check* (CI) and *auto-fix* (developer command).
+**Principle:** run formatting in hooks/CI as a _check_ (CI) and _auto-fix_ (developer command).
 
 ## Linting (ESLint)
 

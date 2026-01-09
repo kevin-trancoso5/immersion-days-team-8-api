@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run commitlint
+yarn commitlint --edit "$1"
+
+# Mark WIP mode to skip heavy steps in pre-commit
+if head -n1 "$1" | grep -qi '^wip:'; then
+  echo "WIP commit detected; setting skip flag"
+  echo "1" > .git/SKIP_BUILD_FLAG
+fi

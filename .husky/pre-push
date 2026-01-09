@@ -1,0 +1,23 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+case "$BRANCH" in
+  main|master|dev|feat/*|fix/*|chore/*) ;;
+  *)
+    echo "Branch name $BRANCH is not allowed. Use main|master|dev|feat/*|fix/*|chore/*"
+    exit 1
+    ;;
+esac
+
+# Prevent pushing WIP commits to protected branches
+if echo "$BRANCH" | grep -Eq '^main$|^master$|^dev$'; then
+  if git log -1 --pretty=%s | grep -qi '^wip:'; then
+    echo "WIP commit cannot be pushed to $BRANCH"
+    exit 1
+  fi
+fi
+
+# Run tests (allow no tests)
+yarn test --passWithNoTests --bail || exit 1

@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+case "$BRANCH" in
+  main|master|dev|feat/*|fix/*|chore/*)
+    ;;
+  *)
+    echo "Warning: Branch name $BRANCH does not follow feat/*|fix/*|chore/* (allowed main|master|dev)."
+    ;;
+esac

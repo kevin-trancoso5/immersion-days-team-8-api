@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+.git
+.vscode
+.yarn
+**/*.spec.ts
+test/
+Dockerfile
+README.md
+CONFIGURATION_PRINCIPLES.md
+SCAFFOLDING_PLAN.md

@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Clear WIP skip flag if present
+if [ -f .git/SKIP_BUILD_FLAG ]; then
+  rm -f .git/SKIP_BUILD_FLAG
+fi
