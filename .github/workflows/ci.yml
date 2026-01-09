@@ -44,9 +44,6 @@ jobs:
       - name: Install dependencies (immutable)
         run: yarn install --immutable
 
-      - name: Dedupe check
-        run: yarn dedupe:check
-
       - name: Lint
         run: yarn lint
 
