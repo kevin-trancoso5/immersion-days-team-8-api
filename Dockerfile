@@ -24,7 +24,8 @@ WORKDIR /app
 USER node
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY .env* ./
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD ["bash", "-lc", "curl -fsS http://localhost:3000/health || exit 1"]
-CMD ["node", "dist/main.js"]
+CMD ["sh", "-c", "[ -f .env ] && set -a && . ./.env && set +a; node dist/main.js"]
