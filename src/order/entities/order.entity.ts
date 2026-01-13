@@ -15,7 +15,7 @@ export class Order {
   @Column({ name: 'phone_number' })
   phoneNumber: string;
 
-  @Column({ name: 'address' })
+  @Column()
   address: string;
 
   @Column({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

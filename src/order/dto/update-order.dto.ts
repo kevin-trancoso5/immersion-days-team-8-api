@@ -1,23 +1,23 @@
-import { IsString, IsOptional } from 'class-validator';
-import { Product } from 'product/entities/product.entity';
+import { IsString, IsOptional, IsUUID } from 'class-validator';
 
 export class UpdateOrderDto {
   @IsString()
   @IsOptional()
-  fullName: string;
+  fullName?: string;
 
   @IsString()
   @IsOptional()
-  email: string;
+  email?: string;
 
   @IsString()
   @IsOptional()
-  phoneNumber: string;
+  phoneNumber?: string;
 
   @IsString()
   @IsOptional()
-  address: string;
+  address?: string;
 
   @IsOptional()
-  products: Product[];
+  @IsUUID('4', { each: true })
+  productIds?: string[];
 }

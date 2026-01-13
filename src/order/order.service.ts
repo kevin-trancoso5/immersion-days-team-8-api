@@ -16,7 +16,7 @@ export class OrderService {
   ) {}
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
-    const { products: productIds, ...orderData } = createOrderDto;
+    const { productIds: productIds, ...orderData } = createOrderDto;
 
     // Fetch products by IDs
     const products = await this.productRepository.findBy({ id: In(productIds) });
@@ -49,7 +49,22 @@ export class OrderService {
 
   async update(id: string, updateOrderDto: UpdateOrderDto): Promise<Order> {
     const order = await this.findOne(id);
-    Object.assign(order, updateOrderDto);
+    const { productIds: productIds, ...orderData } = updateOrderDto;
+
+    Object.assign(order, orderData);
+
+    if (productIds) {
+      const products = await this.productRepository.findBy({ id: In(productIds) });
+
+      if (products.length !== productIds.length) {
+        const foundIds = products.map((p) => p.id);
+        const missingIds = productIds.filter((pid) => !foundIds.includes(pid));
+        throw new NotFoundException(`Products not found: ${missingIds.join(', ')}`);
+      }
+
+      order.products = products;
+    }
+
     return this.orderRepository.save(order);
   }
 
