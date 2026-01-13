@@ -1,19 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-      - master
-      - dev
-      - 'feat/**'
-      - 'fix/**'
-      - 'chore/**'
-  pull_request:
-    branches:
-      - main
-      - master
-      - dev
   workflow_dispatch:
 
 permissions:

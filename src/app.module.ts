@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { Product } from './product/entities/product.entity';
+import { OrderModule } from 'order/order.module';
+import { Order } from 'order/entities/order.entity';
 
 @Module({
   imports: [
@@ -17,10 +19,11 @@ import { Product } from './product/entities/product.entity';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       ssl: process.env.DB_SSLMODE === 'require',
-      entities: [Product],
+      entities: [Product, Order],
       synchronize: false,
     }),
     ProductModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
