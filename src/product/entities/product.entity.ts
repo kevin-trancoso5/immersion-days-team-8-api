@@ -9,7 +9,7 @@ export class Product {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ name: 'image_url' })
   imageUrl: string;
 
   @Column('decimal', { precision: 10, scale: 2 })
