@@ -19,6 +19,5 @@ export class CreateOrderDto {
   address: string;
 
   @IsNotEmpty()
-  @IsUUID('4', { each: true })
   productIds: string[];
 }
